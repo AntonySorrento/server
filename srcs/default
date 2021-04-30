@@ -3,7 +3,7 @@ server
 	listen 80;
 	listen [::]:80;
 	server_name localhost fail_timeout=0;
-	return 301 https://localhost;
+	return 301 https://$host$request_uri;
 }
 server {
 	listen 443 ssl;
@@ -11,7 +11,7 @@ server {
 	ssl_certificate /etc/nginx/ssl/localhost.pem;
 	ssl_certificate_key /etc/nginx/ssl/localhost.key;
 	root /var/www/localhost;
-	index index.php index.html index.htm index.nginx-debian.html;
+	index index.php index.html index.htm;
 	server_name _;
 	location /{
 		try_files $uri $uri/ =404;
