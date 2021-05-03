@@ -13,6 +13,7 @@ COPY srcs/start.sh ./
 COPY srcs/wp-config.php ./
 COPY srcs/config.inc.php ./
 COPY srcs/default ./
+COPY srcs/autoindex.sh ./
 
 CMD bash /start.sh
 
