@@ -15,6 +15,9 @@ COPY srcs/config.inc.php ./
 COPY srcs/default ./
 COPY srcs/defaultoff ./
 
+# run wp
+# phpmyadmin
+
 CMD bash /start.sh
 
 EXPOSE 80
