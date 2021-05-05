@@ -2,8 +2,17 @@
 mkdir /etc/nginx/ssl
 openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out /etc/nginx/ssl/localhost.pem -keyout /etc/nginx/ssl/localhost.key -subj "/C=FR/ST=Paca/L=Nice/O=42 School/OU=asorrent/CN=localhost"
 #NGINX
+	#!/usr/bin/env bash --- set autoindex off
+if [[ "${AUTOINDEX}" == "off" ]]; then
+	rm ./default
+	mv ./defaultoff etc/nginx/sites-available
+	mv etc/nginx/sites-available/defaultoff etc/nginx/sites-available/default
+	echo "************   autoindex off   **************"
+else
+	rm ./defaultoff
+	mv ./default etc/nginx/sites-available
+fi
 mkdir var/www/localhost
-mv ./default etc/nginx/sites-available
 cp /var/www/html/index.nginx-debian.html /var/www/localhost
 ln -s etc/nginx/sites-available/default etc/nginx/sites-enabled
 chown -R www-data /var/www/*
