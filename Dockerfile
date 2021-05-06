@@ -10,13 +10,17 @@ RUN apt-get install -y php-mbstring php-zip php-gd
 RUN apt-get install -y php-curl php-gd php-intl php-mbstring php-soap php-xml php-xmlrpc php-zip
 
 COPY srcs/start.sh ./
-COPY srcs/wp-config.php ./
+COPY srcs/wordpress ./var/www/localhost/wordpress
 COPY srcs/config.inc.php ./
 COPY srcs/default ./
 COPY srcs/defaultoff ./
 
-# run wp
-# phpmyadmin
+RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-all-languages.tar.gz
+RUN tar xvf phpMyAdmin-4.9.0.1-all-languages.tar.gz
+RUN mv phpMyAdmin-4.9.0.1-all-languages var/www/localhost/phpmyadmin
+RUN mv ./config.inc.php var/www/localhost/phpmyadmin
+RUN chmod 660 /var/www/localhost/phpmyadmin/config.inc.php
+RUN chown -R www-data:www-data /var/www/localhost/phpmyadmin
 
 CMD bash /start.sh
 

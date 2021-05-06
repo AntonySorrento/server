@@ -23,21 +23,21 @@ echo "CREATE DATABASE wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_
 echo "GRANT ALL ON wordpress.* TO 'wordpress_user'@'localhost' IDENTIFIED BY 'password';" | mysql -u root
 echo "FLUSH PRIVILEGES;" | mysql -u root
 #PHPMYADMIN
-wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-all-languages.tar.gz # run dockerfile et efface ici
-tar xvf phpMyAdmin-4.9.0.1-all-languages.tar.gz #
-mv phpMyAdmin-4.9.0.1-all-languages var/www/localhost/phpmyadmin #
-mv ./config.inc.php var/www/localhost/phpmyadmin #
-chmod 660 /var/www/localhost/phpmyadmin/config.inc.php #
-chown -R www-data:www-data /var/www/localhost/phpmyadmin #
+# wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-all-languages.tar.gz # run dockerfile et efface ici
+# tar xvf phpMyAdmin-4.9.0.1-all-languages.tar.gz #
+# mv phpMyAdmin-4.9.0.1-all-languages var/www/localhost/phpmyadmin #
+# mv ./config.inc.php var/www/localhost/phpmyadmin #
+# chmod 660 /var/www/localhost/phpmyadmin/config.inc.php #
+# chown -R www-data:www-data /var/www/localhost/phpmyadmin #
 service php7.3-fpm start
 echo "GRANT ALL ON *.* TO 'asorrent'@'localhost' IDENTIFIED BY '123'" | mysql -u root
 echo "FLUSH PRIVILEGES;" | mysql -u root
 #WORDPRESS cette partie sera suprrimée
-wget https://wordpress.org/latest.tar.gz # je le fais une seule fois
-tar xvf latest.tar.gz # je le fais une seule fois
-mkdir var/www/localhost/wordpress # doit être fait dans le dockerfile avec RUN 
-cp -a wordpress/. /var/www/localhost/wordpress # faire COPY dans le dockerfile dont le fichier wp-conf..
-mv ./wp-config.php /var/www/localhost/wordpress # sera fait directement dans le dossier srcs/wp
+# wget https://wordpress.org/latest.tar.gz # je le fais une seule fois
+# tar xvf latest.tar.gz # je le fais une seule fois
+# mkdir var/www/localhost/wordpress # doit être fait dans le dockerfile avec RUN // je n'ai rien fait car plus pertinent avec la copie du dossier wordpress
+# cp -a wordpress/. /var/www/localhost/wordpress # faire COPY dans le dockerfile dont le fichier wp-conf.. // pareil qu'au dessus
+# mv ./wp-config.php /var/www/localhost/wordpress # sera fait directement dans le dossier srcs/wp // pareil qu'au dessus
 #LANCEMENT
 service nginx start
 service mysql restart
